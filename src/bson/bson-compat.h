@@ -39,6 +39,7 @@
 
 
 #ifdef BSON_OS_WIN32
+#include "sdkddkver.h"
 #if defined(_WIN32_WINNT) && (_WIN32_WINNT < 0x0600)
 #undef _WIN32_WINNT
 #endif
@@ -87,7 +88,9 @@ BSON_BEGIN_DECLS
 
 #ifdef _MSC_VER
 #include <time.h>
+#include <inttypes.h>
 #include "bson-stdint-win32.h"
+
 #ifndef __cplusplus
 /* benign redefinition of type */
 #pragma warning(disable : 4142)
