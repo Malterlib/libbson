@@ -287,7 +287,7 @@ bson_decimal128_to_string (const bson_decimal128_t *dec, /* IN  */
 
          if (radix_position > 0) { /* non-zero digits before radix */
             for (i = 0;
-                 i < radix_position && (str_out - str) < BSON_DECIMAL128_STRING;
+                 i < (size_t)radix_position && (str_out - str) < BSON_DECIMAL128_STRING;
                  i++) {
                *(str_out++) = *(significand_read++) + '0';
             }
@@ -593,7 +593,7 @@ bson_decimal128_from_string (const char *string,     /* IN */
    /* to represent user input */
 
    /* Overflow prevention */
-   if (exponent <= radix_position && radix_position - exponent > (1 << 14)) {
+   if (exponent <= (int32_t)radix_position && radix_position - exponent > (1 << 14)) {
       exponent = BSON_DECIMAL128_EXPONENT_MIN;
    } else {
       exponent -= radix_position;
